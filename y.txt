@@ -1,0 +1,92 @@
+%{
+    /* Section 1: Definitions and C Code */
+    // Includes, macro definitions, global variables, and helper functions
+    // These are copied verbatim to the generated C file (y.tab.c)
+
+    #include <stdio.h>
+    #include <stdlib.h> // For exit(), atoi(), etc.
+
+    // Extern declarations for lexer functions/variables
+    extern int yylex();
+    extern FILE *yyin; // If you want to redirect input from a file
+
+    // Error reporting function (mandatory for yacc/bison)
+    void yyerror(const char *s);
+%}
+
+/* Section 2: Yacc Declarations */
+// Token declarations, type definitions for semantic values, precedence/associativity rules
+
+%union {
+    // Define the type of semantic values that can be passed between rules
+    int ival;     // For integer values
+    char *sval;   // For string values (identifiers, literals)
+    // struct Node *node_ptr; // For pointers to syntax tree nodes
+}
+
+// Token declarations (must match what lex returns)
+// Use <member> to specify the type from the %union for that token
+%token <ival> NUMBER
+%token <sval> IDENTIFIER
+
+// Non-token terminals (simple keywords/operators)
+%token ADD SUB MUL DIV
+%token LP RP SEMICOLON
+%token ASSIGN
+
+// Precedence and associativity rules (optional but highly recommended for expressions)
+%left ADD SUB
+%left MUL DIV
+%right ASSIGN
+
+/* Section 3: Grammar Rules and Actions */
+// Non-terminal : Production Rule { Semantic Action (C code) }
+
+%%
+program:
+    // This is the start symbol (first rule listed)
+    // Matches one or more statements
+    statement_list
+    ;
+
+statement_list:
+    statement_list statement { /* Optional action: e.g., link statements in a list */ }
+    | statement                { /* Optional action */ }
+    ;
+
+statement:
+    IDENTIFIER ASSIGN expression SEMICOLON {
+        // Example: printf("Assignment: %s = %d;\n", $1, $3);
+        // Here, $1 is sval of IDENTIFIER, $3 is ival of expression
+        // Store in symbol table or generate intermediate code
+    }
+    | /* other statement types */
+    ;
+
+expression:
+    NUMBER                    { $$ = $1; /* Value of expression is value of number */ }
+    | IDENTIFIER              { /* Lookup identifier value from symbol table */ }
+    | expression ADD expression { $$ = $1 + $3; /* Value of expression is sum of sub-expressions */ }
+    | expression MUL expression { $$ = $1 * $3; }
+    | LP expression RP        { $$ = $2; /* Value of expression is value inside parentheses */ }
+    ;
+
+%%
+
+/* Section 4: User Subroutines (Auxiliary C Code) */
+// Any additional C functions needed by the parser, including yyerror() and main()
+
+void yyerror(const char *s) {
+    // This function is called by yacc/bison when a syntax error is detected.
+    fprintf(stderr, "Error: %s\n", s);
+    // You might want to print more context here, like line number
+}
+
+// int main(int argc, char **argv) {
+//     // This is the entry point for the parser.
+//     // yyin = fopen("input.txt", "r"); // Optional: set input file
+//     // if (!yyin) { perror("Could not open file"); return 1; }
+//     yyparse(); // Start parsing
+//     // fclose(yyin); // Close file if opened
+//     return 0;
+// }
