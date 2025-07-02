@@ -1,0 +1,39 @@
+🔧 Compile and Run
+
+Edit
+gcc epsilon_closure.c -o closure
+./closure
+
+
+
+
+
+
+🧪 Sample Input:
+
+Edit
+Enter number of states: 4
+Enter number of transitions: 5
+Enter transitions (from to symbol), use 'e' for epsilon:
+0 1 e
+1 2 e
+2 3 a
+0 3 e
+1 3 b
+Enter the state to compute epsilon closure: 0
+
+
+
+
+📤 Output:
+
+Edit
+Epsilon closure of state 0: { 0 1 2 3 }
+✔️ It followed all epsilon (e) transitions from state 0.
+
+
+
+
+
+
+

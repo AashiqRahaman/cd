@@ -1,0 +1,36 @@
+🛠️ How to Compile and Run (on Linux/macOS):
+
+lex lexeme_analyzer.l
+gcc lex.yy.c -o lexeme_analyzer
+./lexeme_analyzer
+
+Then type or paste:
+x = a + b;
+
+
+or ./lexeme_analyzer < sample_input.c
+
+
+
+📤 Output:
+
+Keyword: int
+Identifier: a
+Operator: =
+Number: 5
+Symbol: ;
+Keyword: float
+Identifier: b
+Operator: =
+Identifier: a
+Operator: +
+Number: 2.5
+Symbol: ;
+Keyword: if
+Symbol: (
+Identifier: b
+Operator: >
+Number: 5
+Symbol: )
+Keyword: return
+Symbol: ;

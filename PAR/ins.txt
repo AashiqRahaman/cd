@@ -1,0 +1,14 @@
+🔧 How to Compile and Run:
+
+bison -d parser.y        # generates parser.tab.c and parser.tab.h
+flex parser.l            # generates lex.yy.c
+gcc lex.yy.c parser.tab.c -o parser
+./parser
+
+
+
+
+
+Then type or paste:
+
+x = a + b;

@@ -1,0 +1,22 @@
+🔧 Compilation & Execution:
+
+bison -d icg.y
+flex icg.l
+gcc lex.yy.c icg.tab.c -o icg
+./icg
+
+Then type or paste:
+x = a + b;
+
+⚠️
+or ./icg < sample.c > output.txt
+
+
+
+
+📤 Output:
+
+Enter an assignment statement:
+t1 = c * d
+t2 = b + t1
+a = t2

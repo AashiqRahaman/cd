@@ -1,0 +1,9 @@
+Enter an assignment statement:
+t1 = -b
+t2 = c * d
+t3 = t1 + t2
+t4 = e / f
+t5 = t4 % g
+t6 = t3 - t5
+a = t6
+Syntax error: syntax error

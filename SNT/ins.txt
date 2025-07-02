@@ -1,0 +1,25 @@
+🛠️ Compile and Run
+
+bison -d syntax_tree.y
+flex syntax_tree.l
+gcc syntax_tree.tab.c lex.yy.c -o syntax_tree
+./syntax_tree
+
+
+or ./syntax_tree < sample.c
+
+
+
+
+✅ Output
+Enter a statement (e.g., a = b + c * d;):
+x = a + b * c;
+
+Syntax Tree:
+            c
+        *
+            b
+    +
+        a
+=
+    x
