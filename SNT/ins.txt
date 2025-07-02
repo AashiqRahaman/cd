@@ -8,7 +8,7 @@ gcc syntax_tree.tab.c lex.yy.c -o syntax_tree
 
 or ./syntax_tree < sample.c
 
-
+kjkj
 
 
 ✅ Output
